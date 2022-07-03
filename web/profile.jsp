@@ -110,44 +110,82 @@
                             <img src="img/<%=our_user.getProfile()%>"/>
                             <h5 class="modal-title" id="exampleModalLabel"><%= our_user.getName()%></h5>
                             <!--//details of user-->
-                            <table class="table">
-
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">ID :</th>
-                                        <td><%= our_user.getId()%></td>
-
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Email :</th>
-                                        <td><%= our_user.getEmail()%></td>
-
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Gender :</th>
-                                        <td><%= our_user.getGender()%></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">About :</th>
-                                        <td><%= our_user.getAbout()%></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Registered on :</th>
-                                        <td><%= our_user.getDateTime().toString()%></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div id="profile-details" style="">                              
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">ID :</th>
+                                            <td><%= our_user.getId()%></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Email :</th>
+                                            <td><%= our_user.getEmail()%></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Gender :</th>
+                                            <td><%= our_user.getGender()%></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">About :</th>
+                                            <td><%= our_user.getAbout()%></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Registered on :</th>
+                                            <td><%= our_user.getDateTime().toString()%></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!--details Edit-->
+                            <div id="profile-edit" style="display:none;">
+                                <h4 class="mt-2 alert-warning">Please Edit carefully...</h4>
+                                <form action="EditServlet" method="POST">
+                                    <table class="table">
+                                        <tr>
+                                            <td>ID:</td>
+                                            <td><%=our_user.getId()%></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Name:</td>
+                                            <td><input type="text" class="form-control" name="user_name" value="<%=our_user.getName()%>"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Password:</td>
+                                            <td><input type="password" class="form-control" name="user_password" value="<%=our_user.getPassword()%>"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email:</td>
+                                            <td><input type="email" class="form-control" name="user_email" value="<%=our_user.getEmail()%>"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gender:</td>
+                                            <td><%=our_user.getGender().toUpperCase()%></td>
+                                        </tr>
+                                        <tr>
+                                            <td>About:</td>
+                                            <td><textarea class="form-control" name="user_about" rows="3" ><%=our_user.getAbout()%></textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Profile pic:</td>
+                                            <td><input type="file" class="form-control" /></td>
+                                        </tr>
+                                    </table>
+                                            <div class="container">
+                                                <button class="btn btn-outline-success btn-lg">Save</button>
+                                            </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        
+
                         <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Close</button>
-                        
-                        <button type="button" class="btn btn-primary btn-lg">
+
+                        <button type="button" id="edit-profile-button" class="btn btn-primary btn-lg">
                             <span class="fa fa-edit"></span>
                             Edit
                         </button>
-                        
+
                     </div>
                 </div>
             </div>
@@ -158,6 +196,33 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="js/my.js" type="text/javascript"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
+        <script>
+            $(document).ready(function () {
+                console.log("ready");
+                 // toggle  b/w edit or not edit for this purpose we need toggle 
+                   let editStatus=false;
+                $('#edit-profile-button').click(function () {
+                   
+                if(editStatus == false)
+                {
+                   // hide profile-details and show edit profile
+                  $('#profile-details').hide();
+                  $('#profile-edit').show(); 
+                  editStatus=true;
+                  $(this).text("Back");
+                }
+                else
+                {
+                    // hide profile-details and show edit profile
+                  $('#profile-details').show();
+                  $('#profile-edit').hide();
+                  editStatus=false;
+                  $(this).text("Edit");
+                  
+                }
+                  
+                });
+            });
+        </script>
     </body>
 </html>
