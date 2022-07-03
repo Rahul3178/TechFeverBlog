@@ -85,6 +85,31 @@ public class Userdao
         return us;
     }
     
+    public boolean updateUser(user us)
+    {
+         boolean f=false;
+        try{
+            System.out.println("inside try");
+            System.out.println(us.getProfile());
+            String query="update user set name=?, password=?, email=?, gender=?, about=?, profile=? where id=?";
+            PreparedStatement pstm =con.prepareStatement(query);
+            pstm.setString(1, us.getName());
+            pstm.setString(2, us.getPassword());
+            pstm.setString(3, us.getEmail());
+            pstm.setString(4, us.getGender());
+            pstm.setString(5, us.getAbout());
+            pstm.setString(6, us.getProfile());
+            pstm.setInt(7, us.getId());
+            pstm.executeUpdate();
+            f=true;
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            
+        }
+        return f;
+    }
     
     
 }

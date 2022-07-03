@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Web%20Projects/JSP/TechFeverBlog/src/java/com/tech_fever/blog/servlets/LoginServlet.java</file>
             <file>file:/D:/Web%20Projects/JSP/TechFeverBlog/src/java/com/tech_fever/blog/entities/user.java</file>
-            <file>file:/D:/Web%20Projects/JSP/TechFeverBlog/src/java/com/tech_fever/blog/dao/Userdao.java</file>
-            <file>file:/D:/Web%20Projects/JSP/TechFeverBlog/web/register.jsp</file>
+            <file>file:/D:/Web%20Projects/JSP/TechFeverBlog/web/normal_Navbar.jsp</file>
             <file>file:/D:/Web%20Projects/JSP/TechFeverBlog/web/profile.jsp</file>
-            <file>file:/D:/Web%20Projects/JSP/TechFeverBlog/web/login.jsp</file>
+            <file>file:/D:/Web%20Projects/JSP/TechFeverBlog/web/index.jsp</file>
         </group>
     </open-files>
 </project-private>
