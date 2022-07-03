@@ -139,7 +139,7 @@
                             <!--details Edit-->
                             <div id="profile-edit" style="display:none;">
                                 <h4 class="mt-2 alert-warning">Please Edit carefully...</h4>
-                                <form action="EditServlet" method="POST">
+                                <form action="EditProfileServlet" method="POST" enctype="multipart/form-data">
                                     <table class="table">
                                         <tr>
                                             <td>ID:</td>
@@ -167,7 +167,7 @@
                                         </tr>
                                         <tr>
                                             <td>Profile pic:</td>
-                                            <td><input type="file" class="form-control" /></td>
+                                            <td><input type="file" class="form-control" name="image"/></td>
                                         </tr>
                                     </table>
                                             <div class="container">
