@@ -3,6 +3,7 @@
     Created on : 02-Jul-2022, 8:14:01 pm
     Author     : RAHUL
 --%>
+<%@page import="com.tech_fever.blog.entities.message"%>
 <%@page import="com.tech_fever.blog.entities.user"%>
 <%
     // here we get our user details which we sets in session attribute with current_user key value pair .
@@ -93,6 +94,21 @@
         </nav>
 
         <!--Navbar end-->
+
+        <!--// profile edit alert-->
+        <%
+            //here we have to fetch msg object via session attribute
+            message m = (message) session.getAttribute("msg");
+            // here we have to check msg object is null or not if it null we have to show error msg in login page
+            if (m != null) {
+        %>
+        <div class="alert <%=m.getCssClass()%>" role="alert">
+            <%=m.getContent()%>
+        </div>
+        <%
+                session.removeAttribute("msg");
+            }
+        %>
         <!-- Start profile details of a user -->
         <!-- Button trigger modal -->
         <!-- Modal -->
@@ -107,7 +123,7 @@
                     <div class="modal-body">
                         <div class="container text-center">
                             <!--profile pic-->
-                            <img src="img/<%=our_user.getProfile()%>"/>
+                            <img src="pics/<%=our_user.getProfile()%>"/>
                             <h5 class="modal-title" id="exampleModalLabel"><%= our_user.getName()%></h5>
                             <!--//details of user-->
                             <div id="profile-details" style="">                              
@@ -170,9 +186,9 @@
                                             <td><input type="file" class="form-control" name="image"/></td>
                                         </tr>
                                     </table>
-                                            <div class="container">
-                                                <button class="btn btn-outline-success btn-lg">Save</button>
-                                            </div>
+                                    <div class="container">
+                                        <button class="btn btn-outline-success btn-lg">Save</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -199,28 +215,27 @@
         <script>
             $(document).ready(function () {
                 console.log("ready");
-                 // toggle  b/w edit or not edit for this purpose we need toggle 
-                   let editStatus=false;
+                // toggle  b/w edit or not edit for this purpose we need toggle 
+                let editStatus = false;
                 $('#edit-profile-button').click(function () {
-                   
-                if(editStatus == false)
-                {
-                   // hide profile-details and show edit profile
-                  $('#profile-details').hide();
-                  $('#profile-edit').show(); 
-                  editStatus=true;
-                  $(this).text("Back");
-                }
-                else
-                {
-                    // hide profile-details and show edit profile
-                  $('#profile-details').show();
-                  $('#profile-edit').hide();
-                  editStatus=false;
-                  $(this).text("Edit");
-                  
-                }
-                  
+
+                    if (editStatus == false)
+                    {
+                        // hide profile-details and show edit profile
+                        $('#profile-details').hide();
+                        $('#profile-edit').show();
+                        editStatus = true;
+                        $(this).text("Back");
+                    } else
+                    {
+                        // hide profile-details and show edit profile
+                        $('#profile-details').show();
+                        $('#profile-edit').hide();
+                        editStatus = false;
+                        $(this).text("Edit");
+
+                    }
+
                 });
             });
         </script>

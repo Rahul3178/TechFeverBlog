@@ -5,8 +5,11 @@
 package com.tech_fever.blog.servlets;
 
 import com.tech_fever.blog.dao.Userdao;
+import com.tech_fever.blog.entities.message;
 import com.tech_fever.blog.entities.user;
 import com.tech_fever.blog.helper.Connection_Provider;
+import com.tech_fever.blog.helper.Helper;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -41,7 +44,7 @@ public class EditProfileServlet extends HttpServlet {
             
                 
                 String password=request.getParameter("user_password");
-                
+                // fetch image or file from form 
                 Part snap=request.getPart("image");
                 String imageName=snap.getSubmittedFileName();
                 
@@ -56,18 +59,46 @@ public class EditProfileServlet extends HttpServlet {
               update_user.setEmail(request.getParameter("user_email"));
               update_user.setAbout(request.getParameter("user_about"));
               update_user.setProfile(imageName);
-              out.println(imageName);
+              
               // now we have to insert data into db using dao class function updateuser.
               Userdao dao=new Userdao(Connection_Provider.getConnection());
               // 
               boolean ans=dao.updateUser(update_user);
+              message m=null;
               if(ans==true)
               {
-                 out.println("Profile Updated"); 
+                 
+                 String path=request.getRealPath("/")+"pics"+File.separator+update_user.getProfile();
+                 
+                 if(Helper.deleteFile(path))
+                 {
+                     if(Helper.saveFile(snap.getInputStream(), path))
+                     {
+                          m= new message("Profile Updated","success","alert-success");
+                          s.setAttribute("msg", m);
+                     }
+                     else{
+                          
+                          m= new message("Profile not saved successfully","error","alert-danger");
+                          s.setAttribute("msg", m);
+                     }
+                 }
+                 else{
+                     
+                      m= new message("Old profile not deleted","error","alert-danger");
+                      s.setAttribute("msg", m);
+                 }
+                 
+                 
               }else
               {
-                 out.println("Profile Updated");  
+                 
+                 m= new message("Profile not Updated","error","alert-danger");
+                 s.setAttribute("msg", m);
               }
+              
+              // redirect to profile page
+              response.sendRedirect("profile.jsp");
               
         }
     }
