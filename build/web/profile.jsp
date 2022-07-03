@@ -72,17 +72,17 @@
                                 Contact
                             </a>
                         </li>
-                        
-                        
+
+
                     </ul>
-                    
+
                     <ul class="navbar-nav mr-right">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#"><span class="fa fa-user-circle" style="font-size:18px"></span>
+                            <a class="nav-link active" href="#!"  data-bs-toggle="modal" data-bs-target="#profile-modal"><span class="fa fa-user-circle" style="font-size:18px"></span>
                                 <%=our_user.getName()%>
                             </a>
                         </li>
-                       <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link active" href="LogoutServlet"><span class="fa fa-user-times" style="font-size:18px"></span>
                                 Logout
                             </a>
@@ -93,13 +93,66 @@
         </nav>
 
         <!--Navbar end-->
+        <!-- Start profile details of a user -->
+        <!-- Button trigger modal -->
+        <!-- Modal -->
+        <div class="modal fade" id="profile-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header primary-background text-white">
+                        <i class="material-icons" style="font-size:18px">build</i> &nbsp;
+                        <h5 class="modal-title" id="exampleModalLabel">TechFeverBlog</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container text-center">
+                            <!--profile pic-->
+                            <img src="img/<%=our_user.getProfile()%>"/>
+                            <h5 class="modal-title" id="exampleModalLabel"><%= our_user.getName()%></h5>
+                            <!--//details of user-->
+                            <table class="table">
 
-        <%= our_user.getName()%>
-        <br>
-        <%= our_user.getEmail()%>
-        <br>
-        <%= our_user.getAbout()%>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">ID :</th>
+                                        <td><%= our_user.getId()%></td>
 
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Email :</th>
+                                        <td><%= our_user.getEmail()%></td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Gender :</th>
+                                        <td><%= our_user.getGender()%></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">About :</th>
+                                        <td><%= our_user.getAbout()%></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Registered on :</th>
+                                        <td><%= our_user.getDateTime().toString()%></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        
+                        <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Close</button>
+                        
+                        <button type="button" class="btn btn-primary btn-lg">
+                            <span class="fa fa-edit"></span>
+                            Edit
+                        </button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end profile details of a user -->
 
         <%-- javascript --%>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
