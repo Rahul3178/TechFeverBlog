@@ -32,7 +32,7 @@
             <h3 class="display-3">Sorry ! Something went wrong...</h3>
             <p><%=exception%></p>
             <a href="index.jsp" class="btn primary-background btn-lg text-white mt-3">Home</a>
-            
+
         </div>
     </body>
 </html>

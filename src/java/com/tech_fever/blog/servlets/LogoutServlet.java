@@ -4,10 +4,7 @@
  */
 package com.tech_fever.blog.servlets;
 
-import com.tech_fever.blog.dao.Userdao;
 import com.tech_fever.blog.entities.message;
-import com.tech_fever.blog.entities.user;
-import com.tech_fever.blog.helper.Connection_Provider;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -20,7 +17,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author RAHUL
  */
-public class LoginServlet extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,32 +33,19 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-
-            // login Servlet fetch email and password from login page
-            String userEmail = request.getParameter("user_email");
-            String userPassword = request.getParameter("user_password");
-
-            // with the help of user dao function we can check in database we have same email and password or not
-            Userdao dao = new Userdao(Connection_Provider.getConnection());
-            // it prove us user details if email and password matches 
-            user old_user = dao.getUserByEmailAndPassword(userEmail, userPassword);
-
-            if (old_user == null) {
-                // login error
-                //   out.println("Invalid Credentials Try again......");
-
-                message msg = new message("Invalid Credentials Try again...", "error", "alert-danger");
-                // to send msg object to our page we use session object and in login jsp we get that object and its value 
-                HttpSession s = request.getSession();
-                s.setAttribute("msg", msg);
-                response.sendRedirect("login.jsp");
-            } else 
-            {
-                // here we are creating session via httpSession interface
-                HttpSession s = request.getSession();
-                s.setAttribute("current_user", old_user);
-                response.sendRedirect("profile.jsp");
-            }
+            // for logout we have to remove user value from session object 
+            HttpSession s=request.getSession();
+            // now remove our user object from session which we set into logging servlet ->
+            s.removeAttribute("current_user");
+            // have to send a succes message for logout successfully
+            message m= new message("Logout Successfully...","sucess","alert-success");
+            // here we assign that msg to new session object to pass message to login jsp page.
+            s.setAttribute("msg",m);
+            // send user back to login page.
+            response.sendRedirect("login.jsp");
+            
+            
+            
         }
     }
 

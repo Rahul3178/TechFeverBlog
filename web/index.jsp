@@ -21,6 +21,7 @@
                 clip-path: polygon(49% 0, 100% 0, 100% 92%, 73% 97%, 27% 96%, 0 91%, 0 0);
             }
         </style>
+
     </head>
     <body>
         <!--navbar-->
